@@ -1,4 +1,5 @@
 from dataclasses import dataclass, asdict
+from typing import List
 
 from .directory import Directory
 
@@ -6,7 +7,7 @@ from .directory import Directory
 @dataclass(frozen=True)
 class ShotMetadata:
     name: str
-    description: str
+    description: str = ""
 
 
 class Shot:

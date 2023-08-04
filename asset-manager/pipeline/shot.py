@@ -73,6 +73,10 @@ class Shot:
     def create_asset(self, name: str, category: str) -> Asset:
         """Create a new asset inside the pipeline storage.
 
+        Args:
+            name: The name of the asset to create
+            category: The category to assign the asset
+
         Raises:
             FileExistsError: If the asset already exists
         """

@@ -1,7 +1,9 @@
 from dataclasses import dataclass, asdict
 from typing import List
+import os
 
 from .directory import Directory
+from .asset import Asset
 
 
 @dataclass(frozen=True)
@@ -44,6 +46,15 @@ class Shot:
         # also make a copy so that the caller can't further modify
         # the data that we have without calling update_metadata again
         self._metadata = ShotMetadata(**asdict(metadata))
+
+    def assets(self) -> List[str]:
+        """Get the list of assets in the pipeline.
+
+        The order of the returned assets is undetermined.
+        """
+        entries = os.listdir(self._directory)
+        entries.remove(self._directory.METADATA_FILE)
+        return entries
 
     def delete(self) -> None:
         """Remove this shot and all associated data."""

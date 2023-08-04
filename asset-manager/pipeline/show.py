@@ -79,7 +79,7 @@ class Show:
 
         shot_dir = os.path.join(self._directory, name)
         directory = Directory.create(shot_dir)
-        return Show(directory)
+        return Shot(directory)
 
     def delete(self) -> None:
         """Remove this show and all associated shots and data."""

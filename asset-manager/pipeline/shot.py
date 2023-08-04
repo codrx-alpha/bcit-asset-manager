@@ -70,6 +70,16 @@ class Shot:
         directory = Directory(asset_dir)
         return Asset(directory)
 
+    def create_asset(self, name: str, category: str) -> Asset:
+        """Create a new asset inside the pipeline storage.
+
+        Raises:
+            FileExistsError: If the asset already exists
+        """
+        asset_dir = os.path.join(self._directory, name)
+        directory = Directory.create(asset_dir)
+        return Asset(directory, category)
+
     def delete(self) -> None:
         """Remove this shot and all associated data."""
         self._directory.delete()

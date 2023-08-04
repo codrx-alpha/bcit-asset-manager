@@ -56,6 +56,20 @@ class Shot:
         entries.remove(self._directory.METADATA_FILE)
         return entries
 
+    def load_asset(self, name: str) -> Asset:
+        """Load the data for an asset in the storage.
+
+        Args:
+            name: The name of the asset to load
+
+        Raises:
+            FileNotFoundError: if the shot does not exist
+        """
+
+        asset_dir = os.path.join(self._directory, name)
+        directory = Directory(asset_dir)
+        return Asset(directory)
+
     def delete(self) -> None:
         """Remove this shot and all associated data."""
         self._directory.delete()

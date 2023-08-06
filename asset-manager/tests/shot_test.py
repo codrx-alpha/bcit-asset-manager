@@ -1,6 +1,6 @@
 import pytest
 
-from pipeline import Show, Storage, ShowMetadata
+from pipeline import Show, Storage, ShowMetadata, Shot
 
 
 def test_shot_metadata(show: Show):
@@ -46,6 +46,21 @@ def test_shot_update_metadata_is_copy(show: Show):
         shot.metadata().description != meta.description
     ), "updating metadata does not link the passed metadata instance"
 
+
+def test_list_assets(shot: Shot):
+    shot.create_asset("my-asset1")
+    shot.create_asset("my-asset2")
+    shot.create_asset("my-asset3")
+    shot.create_asset("my-asset4")
+
+    expected = {
+        "my-asset1",
+        'my-asset2',
+        "my-asset3",
+        "my-asset4"
+    }
+
+    assert expected == set(shot.assets())
 
 def test_shot_delete_removes_shots(show: Show):
     shot = show.create_shot("my-shot")

@@ -15,7 +15,7 @@ class AssetMetadata:
 
 
 class Asset:
-    def __init__(self, directory: Directory, category: str) -> None:
+    def __init__(self, directory: Directory, category: str = "") -> None:
         """Open an asset in the given directory.
 
         This will load any existing metadata or save the default as needed.

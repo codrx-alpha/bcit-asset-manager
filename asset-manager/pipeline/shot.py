@@ -47,6 +47,28 @@ class Shot:
         # the data that we have without calling update_metadata again
         self._metadata = ShotMetadata(**asdict(metadata))
 
+    def assets_by_category(self, category: str) -> List[str]:
+        """Get the list of assets of a given category in the pipeline.
+
+        The order of the returned assets is undetermined.
+        """
+        entries = os.listdir(self._directory)
+        entries.remove(self._directory.METADATA_FILE)
+
+        assets: List = [str]
+
+        for asset in entries:
+            metadata_file_path = os.path.join(asset, Directory.METADATA_FILE)
+            metadata_file = os.path.join(self._directory, metadata_file_path)
+            with open(metadata_file, "r") as file:
+                metadata_json = json.load(file)
+
+                if metadata_json["category"] == category:
+                    assets.append(asset)
+
+        del assets[0]
+        return assets
+
     def assets(self) -> List[str]:
         """Get the list of assets in the pipeline.
 

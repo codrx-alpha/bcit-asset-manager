@@ -15,3 +15,4 @@ from .storage import Storage
 from .directory import Directory
 from .show import Show, ShowMetadata
 from .shot import Shot, ShotMetadata
+from .asset import Asset, AssetMetadata

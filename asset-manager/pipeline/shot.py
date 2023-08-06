@@ -10,11 +10,23 @@ from .asset import Asset
 
 @dataclass(frozen=True)
 class ShotMetadata:
+    """A dataclass representing the metadata of a shot.
+
+        Attributes:
+            name (str): The name of the shot.
+            description (str): A description of the shot. Defaults to an empty string.
+    """
     name: str
     description: str = ""
 
 
 class Shot:
+    """A class representing a shot in a given directory.
+
+        Attributes:
+            _directory (Directory): The directory where the shot is located.
+            _metadata (ShotMetadata): The metadata of the shot.
+    """
     def __init__(self, directory: Directory) -> None:
         """Open a shot in the given directory.
         
@@ -53,6 +65,10 @@ class Shot:
         """Get the list of assets of a given category in the pipeline.
 
         The order of the returned assets is undetermined.
+
+        Args:
+            category (str): The category of assets to be listed.
+
         """
         entries = os.listdir(self._directory)
         entries.remove(self._directory.METADATA_FILE)
@@ -84,7 +100,7 @@ class Shot:
         """Load the data for an asset in the storage.
 
         Args:
-            name: The name of the asset to load
+            name (str) : The name of the asset to load
 
         Raises:
             FileNotFoundError: if the shot does not exist

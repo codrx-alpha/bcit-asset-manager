@@ -1,6 +1,7 @@
 import os
 from dataclasses import dataclass, asdict
 from typing import List
+import shutil
 
 from .directory import Directory
 from .shot import Shot

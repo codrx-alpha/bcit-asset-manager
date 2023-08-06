@@ -49,6 +49,36 @@ class Asset:
         # the data that we have without calling update_metadata again
         self._metadata = AssetMetadata(**asdict(metadata))
 
+    def shots(self) -> List[str]:
+        """Get the list of shots this asset is used in.
+
+        Asset must have the same name in other shots.
+
+        The order of the returned shots is undetermined.
+        """
+        asset = self._directory.__fspath__()
+        shot = os.path.dirname(asset)
+        show = os.path.dirname(shot)
+
+        shots = os.listdir(show)
+        shots.remove(self._directory.METADATA_FILE)
+
+        shot_path = os.path.split(asset)[0]
+        show_path = os.path.split(shot_path)[0]
+
+        related_shots: List = []
+
+        for entry in shots:
+            asset_path = os.path.join(entry, self._metadata.name)
+            full_asset_path = os.path.join(show_path, asset_path)
+
+            if os.path.exists(full_asset_path):
+                related_shots.append(entry)
+            else:
+                pass
+
+        return related_shots
+
     def delete(self) -> None:
         """Remove this asset and all associated data."""
         self._directory.delete()

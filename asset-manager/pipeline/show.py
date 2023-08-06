@@ -9,11 +9,23 @@ from .shot import Shot
 
 @dataclass(slots=True, eq=True)
 class ShowMetadata:
+    """A dataclass representing the metadata of a show.
+
+        Attributes:
+            name (str): The name of the show.
+            description (str): A description of the show. Defaults to an empty string.
+    """
     name: str
     description: str = ""
 
 
 class Show:
+    """A class representing a show in a given directory.
+
+        Attributes:
+            _directory (Directory): The directory where the show is located.
+            _metadata (ShowMetadata): The metadata of the show.
+    """
     def __init__(self, directory: Directory) -> None:
         """Open a show in the given directory.
         
@@ -51,7 +63,7 @@ class Show:
     def shots(self) -> List[str]:
         """Get the list of shots in the pipeline.
 
-        The order of the returned shots is undertermined.
+        The order of the returned shots is undetermined.
         """
         entries = os.listdir(self._directory)
         entries.remove(self._directory.METADATA_FILE)

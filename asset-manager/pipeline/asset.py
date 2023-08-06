@@ -5,9 +5,6 @@ from dataclasses import dataclass, asdict
 
 from .directory import Directory
 
-# TODO: Create directory for each category?
-# TODO: Scan each asset's metadata for category and return asset names by category?
-
 @dataclass(frozen=True)
 class AssetMetadata:
     name: str

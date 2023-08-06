@@ -92,12 +92,12 @@ class Shot:
         directory = Directory(asset_dir)
         return Asset(directory)
 
-    def create_asset(self, name: str, category: str) -> Asset:
+    def create_asset(self, name: str, category: str = "") -> Asset:
         """Create a new asset inside the pipeline storage.
 
         Args:
             name: The name of the asset to create
-            category: The category to assign the asset
+            category: The category to assign the asset. If this is left empty, asset will have no category.
 
         Raises:
             FileExistsError: If the asset already exists

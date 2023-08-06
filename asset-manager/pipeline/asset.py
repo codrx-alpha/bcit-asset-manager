@@ -69,6 +69,9 @@ class Asset:
         # the data that we have without calling update_metadata again
         self._metadata = AssetMetadata(**asdict(metadata))
 
+        os.rename(self._directory.__fspath__(),
+                  os.path.join(os.path.split(self._directory.__fspath__())[0], self._metadata.name))
+
     def shots(self) -> List[str]:
         """Get the list of shots this asset is used in.
 

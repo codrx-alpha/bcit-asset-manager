@@ -9,12 +9,32 @@ from .directory import Directory
 
 @dataclass(frozen=True)
 class AssetMetadata:
+    """A dataclass for storing information about an asset.
+
+       Attributes:
+           name (str): The name of the asset.
+           category (str): The category of the asset.
+           description (str): A description of the asset.
+    """
     name: str
     category: str
     description: str = ""
 
 
 class Asset:
+    """A class for representing an asset in a given directory.
+
+        Attributes:
+            _directory (Directory): The directory where the asset is located.
+            _metadata (AssetMetadata): The metadata associated with the asset.
+
+        Methods:
+            metadata: Returns the available metadata for this shot.
+            update_metadata: Modify the metadata for this shot.
+            shots: Get the list of shots this asset is used in.
+            archive: Archive this asset into a .zip file.
+            delete: Remove this asset and all associated data.
+    """
     def __init__(self, directory: Directory, category: str = "") -> None:
         """Open an asset in the given directory.
 

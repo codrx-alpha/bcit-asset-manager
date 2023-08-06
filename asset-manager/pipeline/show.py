@@ -81,6 +81,21 @@ class Show:
         directory = Directory.create(shot_dir)
         return Shot(directory)
 
+    def archive(self, delete_original_folder: bool = False) -> None:
+        """Archive this show into a .zip file
+
+        Args:
+            delete_original_folder: If set to True, the directory being zipped will be deleted.
+
+        """
+        path = os.path.join(os.path.dirname(self._directory), self._directory)
+        shutil.make_archive(path, "zip", path)
+
+        if delete_original_folder:
+            shutil.rmtree(path)
+        else:
+            pass
+
     def delete(self) -> None:
         """Remove this show and all associated shots and data."""
         self._directory.delete()
